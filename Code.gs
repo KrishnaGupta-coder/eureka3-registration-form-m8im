@@ -34,6 +34,18 @@ const SPREADSHEET_ID = "";
  * Handles incoming HTTP POST requests from the website submission fetch()
  */
 function doPost(e) {
+  // Acquire Script Lock to handle high-traffic concurrent submissions (50+ simultaneous users)
+  const lock = LockService.getScriptLock();
+  // Wait up to 30 seconds for other concurrent threads to release lock
+  const success = lock.tryLock(30000);
+
+  if (!success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "Server is receiving high traffic. Please try submitting again in a few seconds."
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
   try {
     let data;
     
@@ -221,6 +233,9 @@ function doPost(e) {
     return ContentService
       .createTextOutput(errorOutput)
       .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    // Release the lock so the next waiting user can execute safely
+    lock.releaseLock();
   }
 }
 
