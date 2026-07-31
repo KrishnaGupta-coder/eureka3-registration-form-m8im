@@ -3,32 +3,14 @@
  * EUREKA! 2026 REGISTRATION WEB APP - GOOGLE APPS SCRIPT BACKEND
  * Organized by Arya College of Engineering & I.T. & Arya Incubation Centre
  * ==============================================================================
- * 
- * INSTRUCTIONS FOR DEPLOYMENT:
- * 1. Open Google Sheets (https://sheets.google.com) and create a new spreadsheet.
- * 2. Rename the spreadsheet to "Eureka 2026 Registrations".
- * 3. Click Extensions > Apps Script in the top menu.
- * 4. Replace all existing code in Code.gs with this entire file.
- * 5. Replace appsscript.json content with the provided appsscript.json manifest.
- * 6. Click "Deploy" > "New deployment".
- * 7. Click the gear icon next to "Select type" and choose "Web app".
- * 8. Set Configuration:
- *    - Description: Eureka 2026 Registration Backend
- *    - Execute as: Me (your Google account)
- *    - Who has access: Anyone
- * 9. Click "Deploy" and authorize access when prompted.
- * 10. Copy the generated "Web App URL" (ends in /exec).
- * 11. Paste the URL into `script.js` on line 11:
- *     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
- * ==============================================================================
  */
 
 // Global Sheet Configuration
 const SHEET_NAME = "Registrations";
 
 // Optional: If Apps Script was created as a standalone script at script.google.com,
-// paste your Google Sheet ID here (from Google Sheet URL: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit)
-const SPREADSHEET_ID = "";
+// paste your Google Sheet ID inside the quotes below:
+const SPREADSHEET_ID = ""; 
 
 /**
  * Handles incoming HTTP POST requests from the website submission fetch()
@@ -119,6 +101,21 @@ function doPost(e) {
         "Member 4 Branch",
         "Member 4 Section",
         "Member 4 Mobile",
+        "Member 5 Name",
+        "Member 5 Roll No",
+        "Member 5 Branch",
+        "Member 5 Section",
+        "Member 5 Mobile",
+        "Member 6 Name",
+        "Member 6 Roll No",
+        "Member 6 Branch",
+        "Member 6 Section",
+        "Member 6 Mobile",
+        "Member 7 Name",
+        "Member 7 Roll No",
+        "Member 7 Branch",
+        "Member 7 Section",
+        "Member 7 Mobile",
         "Project Description"
       ];
       
@@ -173,6 +170,30 @@ function doPost(e) {
     const m4Section = m4.section || data.m4Section || "";
     const m4Mobile = m4.mobile || data.m4Mobile || "";
 
+    // Extract Member 5 Details
+    const m5 = data.member5 || {};
+    const m5Name = m5.name || data.m5Name || "";
+    const m5Roll = m5.rollNumber || data.m5Roll || "";
+    const m5Branch = m5.branch || data.m5Branch || "";
+    const m5Section = m5.section || data.m5Section || "";
+    const m5Mobile = m5.mobile || data.m5Mobile || "";
+
+    // Extract Member 6 Details
+    const m6 = data.member6 || {};
+    const m6Name = m6.name || data.m6Name || "";
+    const m6Roll = m6.rollNumber || data.m6Roll || "";
+    const m6Branch = m6.branch || data.m6Branch || "";
+    const m6Section = m6.section || data.m6Section || "";
+    const m6Mobile = m6.mobile || data.m6Mobile || "";
+
+    // Extract Member 7 Details
+    const m7 = data.member7 || {};
+    const m7Name = m7.name || data.m7Name || "";
+    const m7Roll = m7.rollNumber || data.m7Roll || "";
+    const m7Branch = m7.branch || data.m7Branch || "";
+    const m7Section = m7.section || data.m7Section || "";
+    const m7Mobile = m7.mobile || data.m7Mobile || "";
+
     // Extract Project Idea Description
     const projectDescription = data.projectDescription || "";
 
@@ -205,6 +226,21 @@ function doPost(e) {
       m4Branch,
       m4Section,
       m4Mobile,
+      m5Name,
+      m5Roll,
+      m5Branch,
+      m5Section,
+      m5Mobile,
+      m6Name,
+      m6Roll,
+      m6Branch,
+      m6Section,
+      m6Mobile,
+      m7Name,
+      m7Roll,
+      m7Branch,
+      m7Section,
+      m7Mobile,
       projectDescription
     ];
 

@@ -171,6 +171,9 @@ function handleTeamSizeChange(size) {
     const card2 = document.getElementById('memberCard2');
     const card3 = document.getElementById('memberCard3');
     const card4 = document.getElementById('memberCard4');
+    const card5 = document.getElementById('memberCard5');
+    const card6 = document.getElementById('memberCard6');
+    const card7 = document.getElementById('memberCard7');
 
     // Reset member cards visibility
     if (soloNotice) soloNotice.style.display = (size === 1) ? 'flex' : 'none';
@@ -178,6 +181,9 @@ function handleTeamSizeChange(size) {
     toggleMemberCard(card2, size >= 2, ['m2Name', 'm2Roll', 'm2Branch', 'm2Section', 'm2Mobile']);
     toggleMemberCard(card3, size >= 3, ['m3Name', 'm3Roll', 'm3Branch', 'm3Section', 'm3Mobile']);
     toggleMemberCard(card4, size >= 4, ['m4Name', 'm4Roll', 'm4Branch', 'm4Section', 'm4Mobile']);
+    toggleMemberCard(card5, size >= 5, ['m5Name', 'm5Roll', 'm5Branch', 'm5Section', 'm5Mobile']);
+    toggleMemberCard(card6, size >= 6, ['m6Name', 'm6Roll', 'm6Branch', 'm6Section', 'm6Mobile']);
+    toggleMemberCard(card7, size >= 7, ['m7Name', 'm7Roll', 'm7Branch', 'm7Section', 'm7Mobile']);
 }
 
 function toggleMemberCard(cardElement, show, fieldIds) {
@@ -308,15 +314,12 @@ function validateStep(stepNum) {
     } else if (stepNum === 2) {
         const teamSize = parseInt(document.getElementById('teamSize').value || 1);
 
-        if (teamSize >= 2) {
-            isValid = validateMemberFields(['m2Name', 'm2Roll', 'm2Branch', 'm2Section', 'm2Mobile']) && isValid;
-        }
-        if (teamSize >= 3) {
-            isValid = validateMemberFields(['m3Name', 'm3Roll', 'm3Branch', 'm3Section', 'm3Mobile']) && isValid;
-        }
-        if (teamSize >= 4) {
-            isValid = validateMemberFields(['m4Name', 'm4Roll', 'm4Branch', 'm4Section', 'm4Mobile']) && isValid;
-        }
+        if (teamSize >= 2) isValid = validateMemberFields(['m2Name', 'm2Roll', 'm2Branch', 'm2Section', 'm2Mobile']) && isValid;
+        if (teamSize >= 3) isValid = validateMemberFields(['m3Name', 'm3Roll', 'm3Branch', 'm3Section', 'm3Mobile']) && isValid;
+        if (teamSize >= 4) isValid = validateMemberFields(['m4Name', 'm4Roll', 'm4Branch', 'm4Section', 'm4Mobile']) && isValid;
+        if (teamSize >= 5) isValid = validateMemberFields(['m5Name', 'm5Roll', 'm5Branch', 'm5Section', 'm5Mobile']) && isValid;
+        if (teamSize >= 6) isValid = validateMemberFields(['m6Name', 'm6Roll', 'm6Branch', 'm6Section', 'm6Mobile']) && isValid;
+        if (teamSize >= 7) isValid = validateMemberFields(['m7Name', 'm7Roll', 'm7Branch', 'm7Section', 'm7Mobile']) && isValid;
 
     } else if (stepNum === 3) {
         const projectDesc = document.getElementById('projectDescription');
@@ -454,6 +457,27 @@ async function submitForm() {
             branch: document.getElementById('m4Branch').value,
             section: document.getElementById('m4Section').value,
             mobile: document.getElementById('m4Mobile').value.trim()
+        } : null,
+        member5: teamSize >= 5 ? {
+            name: document.getElementById('m5Name').value.trim(),
+            rollNumber: document.getElementById('m5Roll').value.trim(),
+            branch: document.getElementById('m5Branch').value,
+            section: document.getElementById('m5Section').value,
+            mobile: document.getElementById('m5Mobile').value.trim()
+        } : null,
+        member6: teamSize >= 6 ? {
+            name: document.getElementById('m6Name').value.trim(),
+            rollNumber: document.getElementById('m6Roll').value.trim(),
+            branch: document.getElementById('m6Branch').value,
+            section: document.getElementById('m6Section').value,
+            mobile: document.getElementById('m6Mobile').value.trim()
+        } : null,
+        member7: teamSize >= 7 ? {
+            name: document.getElementById('m7Name').value.trim(),
+            rollNumber: document.getElementById('m7Roll').value.trim(),
+            branch: document.getElementById('m7Branch').value,
+            section: document.getElementById('m7Section').value,
+            mobile: document.getElementById('m7Mobile').value.trim()
         } : null,
         projectDescription: document.getElementById('projectDescription').value.trim()
     };
