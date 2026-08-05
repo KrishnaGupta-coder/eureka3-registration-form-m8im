@@ -424,8 +424,13 @@ async function submitForm() {
 
     const teamSize = parseInt(document.getElementById('teamSize').value);
 
+    // Generate dynamic Registration ID
+    const randomCode = Math.floor(1000 + Math.random() * 9000);
+    const regId = `EUR-2026-${randomCode}`;
+
     // Build Payload JSON
     const payload = {
+        registrationId: regId,
         timestamp: new Date().toISOString(),
         teamLeader: document.getElementById('leaderName').value.trim(),
         leaderRollNo: document.getElementById('leaderRollNo').value.trim(),
@@ -493,9 +498,6 @@ async function submitForm() {
             body: JSON.stringify(payload)
         });
 
-        // Generate dynamic Registration ID
-        const randomCode = Math.floor(1000 + Math.random() * 9000);
-        const regId = `EUR-2026-${randomCode}`;
         document.getElementById('resRegId').textContent = regId;
 
         // Show Success Overlay
@@ -504,9 +506,6 @@ async function submitForm() {
     } catch (error) {
         console.error('Submission error:', error);
 
-        // Fallback check for Apps Script opaque redirect success
-        const randomCode = Math.floor(1000 + Math.random() * 9000);
-        const regId = `EUR-2026-${randomCode}`;
         document.getElementById('resRegId').textContent = regId;
 
         // If APPS_SCRIPT_URL is still placeholder, notify user or fallback
